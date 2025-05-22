@@ -6,7 +6,11 @@ const MessageSchema = new mongoose.Schema({
   socketid: String,
   time: String,
   date: String,
-  to: String
+  to: String,
+  isremainder:{
+    type:Boolean,
+    default:false
+  }
 })
 
 const Message = mongoose.model('Message', MessageSchema);

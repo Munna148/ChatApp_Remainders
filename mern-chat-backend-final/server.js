@@ -10,6 +10,21 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cors());
 
+app.get('/messages/remainders', async (req, res) => {
+  try {
+    const remainders = await Message.find({ isremainder: true }).select('content');
+    res.status(200).json({
+      success: true,
+      data: remainders
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Server Error',
+      error: err.message
+    });
+  }
+});
 app.use('/users', userRoutes)
 require('./connection')
 
